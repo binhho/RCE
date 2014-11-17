@@ -22,6 +22,7 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        //Init Content Text View
         _contentTextView                 = [[UITextView alloc] initWithFrame:CGRectZero];
         _contentTextView.textColor       = [UIColor blackColor];
         _contentTextView.backgroundColor = [UIColor grayColor];
@@ -31,6 +32,14 @@
         _contentTextView.editable = YES;
         _contentTextView.scrollEnabled = NO;
         [self.contentView addSubview:_contentTextView];
+        
+        //Init Photo Image View
+        _photoImageView                 = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _photoImageView.backgroundColor = [UIColor clearColor];
+        _photoImageView.tag             = kRecordCellPhotoImageViewTag;
+        [self.contentView addSubview:_photoImageView];
+        
+        self.contentView.backgroundColor = [UIColor clearColor];
     }
     
     return self;

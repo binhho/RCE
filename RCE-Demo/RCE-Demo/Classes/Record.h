@@ -18,5 +18,9 @@ typedef NS_ENUM(NSInteger, Type_Record) {
 @property (nonatomic, copy  ) NSString    * id;
 @property (nonatomic, assign) Type_Record type;
 @property (nonatomic, copy  ) NSString    * textContent;
+@property (nonatomic) float imgWidth;
+@property (nonatomic) float imgHeight;
+
+- (NSString*)imgFilename;
 
 @end

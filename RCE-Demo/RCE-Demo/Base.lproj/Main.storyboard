@@ -62,19 +62,64 @@
         <!--Editor View Controller-->
         <scene sceneID="yay-Og-w4R">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S9R-F8-PmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="editorVC" id="wL3-9j-uRw" customClass="EditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="REa-Cl-a6k"/>
                         <viewControllerLayoutGuide type="bottom" id="2c8-G6-MlZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WPe-bm-Meg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ouc-47-2bR">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DLO-dZ-25c">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ouc-47-2bR">
+                                <rect key="frame" x="10" y="0.0" width="394" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="vVo-71-PCb">
+                                    <rect key="frame" x="0.0" y="0.0" width="394" height="250"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 Paradise, Mar - 10.465464, 106.8897744" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptH-VR-f6e">
+                                            <rect key="frame" x="8" y="221" width="378" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="2ZP-VA-YBz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pyco Album" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIh-jj-2Do">
+                                            <rect key="frame" x="8" y="171" width="378" height="42"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="42" id="bM3-th-w3A"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uit-Q4-aPs">
+                                            <rect key="frame" x="147" y="75" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="ose-lM-14A"/>
+                                                <constraint firstAttribute="height" constant="100" id="tfd-yi-pj5"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="ptH-VR-f6e" firstAttribute="top" secondItem="JIh-jj-2Do" secondAttribute="bottom" constant="8" id="1pt-ag-uct"/>
+                                        <constraint firstAttribute="centerY" secondItem="Uit-Q4-aPs" secondAttribute="centerY" id="NQr-4D-WrB"/>
+                                        <constraint firstAttribute="trailing" secondItem="ptH-VR-f6e" secondAttribute="trailing" constant="8" id="PjF-0V-fL3"/>
+                                        <constraint firstAttribute="bottom" secondItem="ptH-VR-f6e" secondAttribute="bottom" constant="8" id="Q2Y-Zy-aNt"/>
+                                        <constraint firstItem="JIh-jj-2Do" firstAttribute="leading" secondItem="vVo-71-PCb" secondAttribute="leading" constant="8" id="VmL-pi-uWK"/>
+                                        <constraint firstAttribute="centerX" secondItem="Uit-Q4-aPs" secondAttribute="centerX" id="gL0-u1-Nx3"/>
+                                        <constraint firstItem="ptH-VR-f6e" firstAttribute="leading" secondItem="vVo-71-PCb" secondAttribute="leading" constant="8" id="jva-mr-RX0"/>
+                                        <constraint firstAttribute="trailing" secondItem="JIh-jj-2Do" secondAttribute="trailing" constant="8" id="prK-fL-r1C"/>
+                                    </constraints>
+                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="wL3-9j-uRw" id="7vl-MD-xCQ"/>
                                     <outlet property="delegate" destination="wL3-9j-uRw" id="ug0-oM-W8C"/>
@@ -83,19 +128,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ouc-47-2bR" firstAttribute="leading" secondItem="WPe-bm-Meg" secondAttribute="leadingMargin" constant="-16" id="BgO-eh-B01"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DLO-dZ-25c" secondAttribute="trailing" constant="-16" id="67r-Ol-521"/>
+                            <constraint firstItem="ouc-47-2bR" firstAttribute="leading" secondItem="WPe-bm-Meg" secondAttribute="leadingMargin" constant="-6" id="BgO-eh-B01"/>
+                            <constraint firstItem="2c8-G6-MlZ" firstAttribute="top" secondItem="DLO-dZ-25c" secondAttribute="bottom" id="WhI-2j-Iq5"/>
+                            <constraint firstItem="DLO-dZ-25c" firstAttribute="top" secondItem="WPe-bm-Meg" secondAttribute="topMargin" id="azt-pv-VAn"/>
                             <constraint firstItem="ouc-47-2bR" firstAttribute="top" secondItem="WPe-bm-Meg" secondAttribute="topMargin" id="dXH-oh-W7h"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ouc-47-2bR" secondAttribute="trailing" constant="-16" id="eBe-Xg-VKE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ouc-47-2bR" secondAttribute="trailing" constant="-6" id="eBe-Xg-VKE"/>
+                            <constraint firstItem="DLO-dZ-25c" firstAttribute="leading" secondItem="WPe-bm-Meg" secondAttribute="leadingMargin" constant="-16" id="fs7-9i-2fA"/>
                             <constraint firstItem="2c8-G6-MlZ" firstAttribute="top" secondItem="ouc-47-2bR" secondAttribute="bottom" id="oDW-uJ-syW"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="_ibAvatarImageView" destination="Uit-Q4-aPs" id="nLZ-bE-D1w"/>
                         <outlet property="ibRecordsTableView" destination="ouc-47-2bR" id="mdf-xn-KWg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9R-F8-PmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1101" y="421"/>
+            <point key="canvasLocation" x="-1381" y="421"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="avatar.png" width="550" height="550"/>
+        <image name="bg.jpg" width="750" height="1334"/>
+    </resources>
 </document>

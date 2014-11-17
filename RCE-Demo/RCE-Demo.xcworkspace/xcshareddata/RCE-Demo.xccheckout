@@ -12,22 +12,34 @@
 	<dict>
 		<key>833CA7221A9CE7E240586BEE97B9E5464285439B</key>
 		<string>ssh://bitbucket.org/PureBytes/projtemplate.git</string>
+		<key>B69746A39273C53914A5A05B73B1189EB2907238</key>
+		<string>github.com:PureBytes/RCE.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>RCE-Demo/RCE-Demo.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>833CA7221A9CE7E240586BEE97B9E5464285439B</key>
+		<string>../../../Temp</string>
+		<key>B69746A39273C53914A5A05B73B1189EB2907238</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/PureBytes/projtemplate.git</string>
+	<string>github.com:PureBytes/RCE.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>833CA7221A9CE7E240586BEE97B9E5464285439B</string>
+	<string>B69746A39273C53914A5A05B73B1189EB2907238</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B69746A39273C53914A5A05B73B1189EB2907238</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RCE</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

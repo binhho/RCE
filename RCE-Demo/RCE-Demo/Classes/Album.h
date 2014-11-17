@@ -23,5 +23,8 @@
 - (void)saveRecords:(void(^)(NSError * error))complete;
 - (void)addRecord:(Record*)record completed:(void(^)(NSError * error))complete;
 - (void)removeRecord:(Record*)record completed:(void(^)(NSError * error))complete;
+- (void)addPhotoRecord:(Record*)record withData:(NSData*)imgData completed:(void(^)(NSError * error))completedBlock;
+- (void)getImageDataForRecord:(Record*)record completde:(void(^)(NSData *data))completedBlock;
+- (void)reorderBetweenIndex:(NSInteger)fromIndex andIndex:(NSInteger)toIndex completed:(void(^)(NSError * error))complete;
 
 @end

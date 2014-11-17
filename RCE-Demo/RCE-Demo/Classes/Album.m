@@ -9,6 +9,7 @@
 #import "Album.h"
 #import "NSString+REC.h"
 #import "AlbumRepository.h"
+#import "Record.h"
 
 #define kEncodingAlbumIdKey       @"kEncodingAlbumIdKey"
 #define kEncodingAlbumNameKey     @"kEncodingAlbumNameKey"
@@ -136,12 +137,62 @@
     });
 }
 
+- (BOOL)storeImgData:(NSData*)imgData forRecord:(Record*)record{
+    AlbumRepository *repo = [[AlbumRepository alloc] init];
+    NSString *folder      = [[repo albumsFolderPath] stringByAppendingPathComponent:_id];
+    if ([[NSFileManager defaultManager] createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil]) {
+        NSString *filePath = [folder stringByAppendingPathComponent:[record imgFilename]];
+        if (!imgData) {
+            return NO;
+        }
+        NSError *error = nil;
+        if ([imgData writeToFile:filePath options:NSDataWritingAtomic error:&error]) {
+            return YES;
+        }
+        NSLog(@"Write Img File Error : %@", [error description]);
+    }
+    
+    return NO;
+}
+
+- (void)addPhotoRecord:(Record*)record withData:(NSData*)imgData completed:(void(^)(NSError * error))completedBlock{
+    void (^block)() = ^{
+        if (![self.records containsObject:record]) {
+            if ([self storeImgData:imgData forRecord:record]) {
+                [self.records addObject:record];
+                completedBlock != nil ? completedBlock(NULL) : 0;
+                return;
+            }
+        }
+        completedBlock != nil ? completedBlock([NSError errorWithDomain:@"RCE" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Write data faile"}]) : 0;
+    };
+    
+    dispatch_async(self.taskQueue, ^{
+        block();
+    });
+}
+
 - (void)removeRecord:(Record*)record completed:(void(^)(NSError * error))complete{
     void (^block)() = ^{
         if ([self.records containsObject:record]) {
             [self.records removeObject:self.records];
         }
         complete != nil ? complete(NULL) : 0;
+    };
+    dispatch_async(self.taskQueue, ^{
+        block();
+    });
+}
+
+- (void)getImageDataForRecord:(Record*)record completde:(void(^)(NSData *data))completedBlock;{
+    void (^block)() = ^{
+        AlbumRepository *repo = [[AlbumRepository alloc] init];
+        NSString *folder      = [[repo albumsFolderPath] stringByAppendingPathComponent:_id];
+        NSString *filePath    = [folder stringByAppendingPathComponent:[record imgFilename]];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            completedBlock ? completedBlock([NSData dataWithContentsOfFile:filePath]) : 0;
+        }
     };
     dispatch_async(self.taskQueue, ^{
         block();
@@ -159,6 +210,17 @@
     NSString *filePath = [folder stringByAppendingPathComponent:kEncodingRecordFileName];
     
     return filePath;
+}
+
+- (void)reorderBetweenIndex:(NSInteger)fromIndex andIndex:(NSInteger)toIndex completed:(void(^)(NSError * error))complete{
+    void (^block)() = ^{
+        Record *record = _records[fromIndex];
+        [_records removeObject:record];
+        [_records insertObject:record atIndex:toIndex];
+    };
+    dispatch_async(self.taskQueue, ^{
+        block();
+    });
 }
 
 @end

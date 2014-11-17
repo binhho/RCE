@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #define kRecordCellContentTextViewTag 100
+#define kRecordCellPhotoImageViewTag  101
+
+@class Record;
 
 @interface RecordCell : UITableViewCell
 
-@property(nonatomic, strong) UITextView *contentTextView;
+@property (nonatomic, strong) UITextView  * contentTextView;
+@property (nonatomic, strong) UIImageView * photoImageView;
+@property (nonatomic        ) Record      * record;
 
 @end

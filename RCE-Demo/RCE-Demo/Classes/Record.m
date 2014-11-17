@@ -12,6 +12,8 @@
 #define kEncodingRecordIdKey          @"kEncodingRecordIdKey"
 #define kEncodingRecordTypeKey        @"kEncodingRecordTypeKey"
 #define kEncodingRecordTextContentKey @"kEncodingRecordTextContentKey"
+#define kEncodingRecordPhotoWidthKey  @"kEncodingRecordPhotoWidthKey"
+#define kEncodingRecordPhotoHeightKey @"kEncodingRecordPhotoHeightKey"
 
 @implementation Record
 
@@ -33,10 +35,11 @@
     if (!self) {
         return nil;
     }
-    
-    _id = [aDecoder decodeObjectForKey:kEncodingRecordIdKey];
-    _type = [aDecoder decodeIntegerForKey:kEncodingRecordTypeKey];
+    _id          = [aDecoder decodeObjectForKey:kEncodingRecordIdKey];
+    _type        = [aDecoder decodeIntegerForKey:kEncodingRecordTypeKey];
     _textContent = [aDecoder decodeObjectForKey:kEncodingRecordTextContentKey];
+    _imgWidth    = [aDecoder decodeFloatForKey:kEncodingRecordPhotoWidthKey];
+    _imgHeight   = [aDecoder decodeFloatForKey:kEncodingRecordPhotoHeightKey];
     
     return self;
 }
@@ -45,6 +48,12 @@
     [aCoder encodeObject:_id forKey:kEncodingRecordIdKey];
     [aCoder encodeInteger:_type forKey:kEncodingRecordTypeKey];
     [aCoder encodeObject:_textContent forKey:kEncodingRecordTextContentKey];
+    [aCoder encodeFloat:_imgWidth forKey:kEncodingRecordPhotoWidthKey];
+    [aCoder encodeFloat:_imgHeight forKey:kEncodingRecordPhotoHeightKey];
+}
+
+- (NSString*)imgFilename{
+    return [NSString stringWithFormat:@"%@.png", _id];
 }
 
 @end
