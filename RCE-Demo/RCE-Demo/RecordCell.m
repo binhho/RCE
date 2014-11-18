@@ -7,6 +7,11 @@
 //
 
 #import "RecordCell.h"
+#import "Record.h"
+#import "EditorViewController.h"
+
+@interface RecordCell () <UITextViewDelegate>
+@end
 
 @implementation RecordCell
 
@@ -29,8 +34,9 @@
         _contentTextView.textAlignment   = NSTextAlignmentCenter;
         _contentTextView.font            = [UIFont systemFontOfSize:13.0f];
         _contentTextView.tag             = kRecordCellContentTextViewTag;
-        _contentTextView.editable = YES;
-        _contentTextView.scrollEnabled = NO;
+        _contentTextView.editable        = YES;
+        _contentTextView.delegate        = self;
+        _contentTextView.scrollEnabled   = NO;
         [self.contentView addSubview:_contentTextView];
         
         //Init Photo Image View
@@ -43,6 +49,23 @@
     }
     
     return self;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    if (_editorVC && _record) {
+        [_editorVC startEditAtRecord:_record];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if([text isEqualToString:@"\n"]){
+        _record.textContent = [textView.text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        [textView resignFirstResponder];
+    }
+        
+    return YES;
 }
 
 @end

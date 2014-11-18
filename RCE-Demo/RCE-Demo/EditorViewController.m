@@ -63,9 +63,35 @@
     _ibAvatarImageView.layer.masksToBounds = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)startEditAtRecord:(Record*)record{
+    [self.ibRecordsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_album.records indexOfObject:record] inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (void)keyboardWillShown:(NSNotification*)notification{
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize      = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    self.ibRecordsTableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height);
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification{    
+//    [self.ibRecordsTableView scrollRectToVisible:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) animated:YES];
+    self.ibRecordsTableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (IBAction)ibaAddRecord:(id)sender{
@@ -224,6 +250,8 @@
     cell.contentTextView.text = @"";
     cell.photoImageView.image = nil;
     Record *record            = _album.records[indexPath.row];
+    cell.record               = record;
+    cell.editorVC             = self;
     
     switch (record.type) {
         case Type_RecordText:{

@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class Album;
+@class Record;
 
 @interface EditorViewController : UIViewController
 
 @property (nonatomic) Album *album;
+
+- (void)startEditAtRecord:(Record*)record;
 
 @end

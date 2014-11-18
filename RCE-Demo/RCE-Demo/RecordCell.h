@@ -12,11 +12,13 @@
 #define kRecordCellPhotoImageViewTag  101
 
 @class Record;
+@class EditorViewController;
 
 @interface RecordCell : UITableViewCell
 
-@property (nonatomic, strong) UITextView  * contentTextView;
-@property (nonatomic, strong) UIImageView * photoImageView;
-@property (nonatomic        ) Record      * record;
+@property (nonatomic, strong) UITextView           * contentTextView;
+@property (nonatomic, strong) UIImageView          * photoImageView;
+@property (nonatomic        ) Record               * record;
+@property (nonatomic, weak  ) EditorViewController * editorVC;
 
 @end
