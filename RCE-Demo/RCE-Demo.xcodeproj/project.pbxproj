@@ -20,6 +20,7 @@
 		8488D3FD1A15F12D008D1FE9 /* NSString+REC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8488D3FC1A15F12D008D1FE9 /* NSString+REC.m */; };
 		8488D4001A15F203008D1FE9 /* AlbumRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 8488D3FF1A15F203008D1FE9 /* AlbumRepository.m */; };
 		8488D4031A1609E2008D1FE9 /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8488D4021A1609E2008D1FE9 /* RecordCell.m */; };
+		84D245F71A1AFFC300EE9FA3 /* CreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D245F61A1AFFC300EE9FA3 /* CreatorViewController.m */; };
 		84DA98281A19B9C200A5D12E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DA98271A19B9C200A5D12E /* UIImage+Resize.m */; };
 		84DA982A1A19C90900A5D12E /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84DA98291A19C90900A5D12E /* bg.jpg */; };
 		84DA982C1A19E03B00A5D12E /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DA982B1A19E03B00A5D12E /* avatar.png */; };
@@ -63,6 +64,8 @@
 		8488D3FF1A15F203008D1FE9 /* AlbumRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumRepository.m; sourceTree = "<group>"; };
 		8488D4011A1609E2008D1FE9 /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
 		8488D4021A1609E2008D1FE9 /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
+		84D245F51A1AFFC300EE9FA3 /* CreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatorViewController.h; sourceTree = "<group>"; };
+		84D245F61A1AFFC300EE9FA3 /* CreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatorViewController.m; sourceTree = "<group>"; };
 		84DA98261A19B9C200A5D12E /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		84DA98271A19B9C200A5D12E /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		84DA98291A19C90900A5D12E /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 				8488D4021A1609E2008D1FE9 /* RecordCell.m */,
 				842928FD1A15AC10003CCEF8 /* EditorViewController.h */,
 				842928FE1A15AC10003CCEF8 /* EditorViewController.m */,
+				84D245F51A1AFFC300EE9FA3 /* CreatorViewController.h */,
+				84D245F61A1AFFC300EE9FA3 /* CreatorViewController.m */,
 				842928E11A15A7B5003CCEF8 /* Main.storyboard */,
 				842928E41A15A7B5003CCEF8 /* Images.xcassets */,
 				842928E61A15A7B5003CCEF8 /* LaunchScreen.xib */,
@@ -332,6 +337,7 @@
 				842928E01A15A7B5003CCEF8 /* ViewController.m in Sources */,
 				842928DD1A15A7B5003CCEF8 /* AppDelegate.m in Sources */,
 				8488D3FD1A15F12D008D1FE9 /* NSString+REC.m in Sources */,
+				84D245F71A1AFFC300EE9FA3 /* CreatorViewController.m in Sources */,
 				842928DA1A15A7B5003CCEF8 /* main.m in Sources */,
 				842929031A15AD76003CCEF8 /* Album.m in Sources */,
 				8488D4031A1609E2008D1FE9 /* RecordCell.m in Sources */,

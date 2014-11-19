@@ -11,6 +11,7 @@
 #import "AlbumRepository.h"
 #import <BlocksKit/UIAlertView+BlocksKit.h>
 #import "EditorViewController.h"
+#import "CreatorViewController.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate>{
     AlbumRepository *_albumRepository;
@@ -81,10 +82,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    /*
     Album *album                     = _albumRepository.albums[indexPath.row];
     UIStoryboard *main               = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     EditorViewController *controller = (EditorViewController*)[main instantiateViewControllerWithIdentifier:@"editorVC"];
     controller.album                 = album;
+    [self.navigationController pushViewController:controller animated:YES];
+     */
+    
+    Album *album                      = _albumRepository.albums[indexPath.row];
+    UIStoryboard *main                = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    CreatorViewController *controller = (CreatorViewController*)[main instantiateViewControllerWithIdentifier:@"creatorVC"];
+    controller.album                  = album;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

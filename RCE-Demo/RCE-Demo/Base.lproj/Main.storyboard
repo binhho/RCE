@@ -53,11 +53,52 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ibAlbumTableView" destination="dlD-ab-KX9" id="e2h-8p-HeQ"/>
+                        <outlet property="view" destination="kh9-bI-dsS" id="edY-0i-65b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1800" y="421"/>
+        </scene>
+        <!--Creator View Controller-->
+        <scene sceneID="bXf-zK-JGd">
+            <objects>
+                <viewController storyboardIdentifier="creatorVC" id="kaA-v6-UrS" customClass="CreatorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EHe-An-f3I"/>
+                        <viewControllerLayoutGuide type="bottom" id="oct-rt-1hj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tOV-Qf-8nC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q9H-dd-nmz">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q9H-dd-nmz" firstAttribute="top" secondItem="tOV-Qf-8nC" secondAttribute="topMargin" id="LDb-Od-ash"/>
+                            <constraint firstItem="oct-rt-1hj" firstAttribute="top" secondItem="Q9H-dd-nmz" secondAttribute="bottom" id="NOs-QB-7C6"/>
+                            <constraint firstItem="Q9H-dd-nmz" firstAttribute="leading" secondItem="tOV-Qf-8nC" secondAttribute="leadingMargin" constant="-16" id="RUj-r1-8W1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Q9H-dd-nmz" secondAttribute="trailing" constant="-16" id="XER-AV-GST"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="ibMainScrollView" destination="Q9H-dd-nmz" id="BBz-te-3Bd"/>
+                        <outlet property="ibPanGestureReg" destination="c94-MF-zi7" id="lhC-d9-hAp"/>
+                        <outlet property="view" destination="tOV-Qf-8nC" id="Fws-dx-4PF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dxq-M5-vkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="c94-MF-zi7">
+                    <connections>
+                        <action selector="ibaPan:" destination="kaA-v6-UrS" id="8bY-We-vr2"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1800" y="1137"/>
         </scene>
         <!--Editor View Controller-->
         <scene sceneID="yay-Og-w4R">
@@ -147,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9R-F8-PmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1381" y="421"/>
+            <point key="canvasLocation" x="-1153" y="421"/>
         </scene>
     </scenes>
     <resources>
