@@ -21,9 +21,10 @@
 #define MESSAGE_TEXT_SIZE_WITH_FONT(text, font) \
 [text boundingRectWithSize:CGSizeMake(self.ibMainScrollView.frame.size.width - 20, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil]
 
-@interface CreatorViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>{
+@interface CreatorViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate>{
     NSMutableArray *_uiElements;
     CGPoint _previousLocation;
+    BOOL _moving;
 }
 
 @property (nonatomic, strong) UIImagePickerController *imgPickerVC;
@@ -259,8 +260,11 @@
 }
 
 - (NSInteger)recordIndexAtLocationPoint:(CGPoint)point{
-    for (NSInteger index = 0; index < _album.records.count - 1; index++) {
-        if ([self topCoordinateAtIndex:index] > point.y && [self topCoordinateAtIndex:index + 1]) {
+    for (NSInteger index = 0; index < _album.records.count; index++) {
+        if ([self topCoordinateAtIndex:index] <= point.y && [self topCoordinateAtIndex:index + 1] > point.y) {
+            return index;
+        }
+        else if (index == (_album.records.count - 1) && [self topCoordinateAtIndex:index] <= point.y){
             return index;
         }
     }
@@ -302,14 +306,24 @@
         }
     }
     else if (regconizer.state == UIGestureRecognizerStateChanged){
-        id sender = regconizer.view;
+        id sender           = regconizer.view;
         CGPoint newLocation = [regconizer locationInView:self.ibMainScrollView];
-        NSLog(@"newLocation : %@", NSStringFromCGPoint(newLocation));
-        //TODO: Check current touch position to scroll the scrollview
-        if (newLocation.y < 300.0 && self.ibMainScrollView.contentOffset.y > 0) {
-            NSLog(@"index %ld", (long)[self recordIndexAtLocationPoint:newLocation]);
-            [self scrollToRecordIndex:[self recordIndexAtLocationPoint:newLocation] - 1];
+//        CGPoint touchPoint  = [regconizer locationInView:self.view];
+        //detect top/bottom view
+        NSInteger topIndex = [self recordIndexAtLocationPoint:newLocation] + kFakeUIElementBase;
+        NSInteger bottomIndex = (regconizer.view.tag + (kFakeUIElementBase - kUIElementBaseTag));
+        NSLog(@" topIndex bottomIndex: %zd - %zd", topIndex, bottomIndex);
+        if (topIndex != bottomIndex) {
+            if (topIndex > bottomIndex) {
+                NSInteger tempIndex = topIndex;
+                topIndex = bottomIndex;
+                bottomIndex = tempIndex;
+            }
+            [self reframeFromBottomIndex:bottomIndex - kFakeUIElementBase toInsertTopIndex:topIndex - kFakeUIElementBase withRegconizer:regconizer];
         }
+        
+        //TODO: re-change record's position        
+        
         if ([sender isKindOfClass:[UITextView class]]) {
             //Detect sender view
             UITextView *textView = (UITextView*)[self.ibMainScrollView viewWithTag:regconizer.view.tag + kFakeUIElementBase];
@@ -332,25 +346,54 @@
         }
         else if ([sender isKindOfClass:[UIImageView class]]){
             UIImageView *imageView = (UIImageView*)[self.ibMainScrollView viewWithTag:regconizer.view.tag + kFakeUIElementBase];
-            imageView.center = [regconizer locationInView:self.ibMainScrollView];
-            
             UIImageView *originalImgView = (UIImageView*)[self.ibMainScrollView viewWithTag:(imageView.tag - kFakeUIElementBase)];
-            originalImgView.image = imageView.image;
             
-            [imageView removeFromSuperview];
+            [UIView animateWithDuration:.35f animations:^{
+                imageView.center = originalImgView.center;
+            } completion:^(BOOL finished) {
+                originalImgView.image = imageView.image;
+                [imageView removeFromSuperview];
+            }];
         }
     }
 }
 
-- (void)reframeFromRecordIndex:(NSInteger)fromIndex toInsertRecordAtIndex:(NSInteger)toIndex{
-    UIView *topview    = nil;
-    UIView *bottomView = nil;
-    if (fromIndex < toIndex) {
-        
+- (void)reframeFromBottomIndex:(NSInteger)bottomIndex toInsertTopIndex:(NSInteger)topIndex withRegconizer:(UIGestureRecognizer*)regconizer{
+    NSLog(@"Top index : %zd - bottom index: %zd", bottomIndex, topIndex);
+    
+    UIView *topview    = [self.ibMainScrollView viewWithTag:kUIElementBaseTag + topIndex];
+    UIView *bottomView = [self.ibMainScrollView viewWithTag:kUIElementBaseTag + bottomIndex];
+    
+    CGRect bottomFrame = bottomView.frame;
+    CGRect topFrame    = topview.frame;
+    
+    CGRect targetBottomFrame = CGRectMake(topFrame.origin.x, topFrame.origin.y, bottomFrame.size.width, bottomFrame.size.height);
+    CGRect targetTopFrame = CGRectMake(bottomFrame.origin.x, targetBottomFrame.origin.y + targetBottomFrame.size.height + kSeparatorHeight, topFrame.size.width, topFrame.size.height);
+    if (!_moving) {
+        _moving = YES;
+        [UIView animateWithDuration:0.35f
+                         animations:^{
+                             
+                             bottomView.frame = targetBottomFrame;
+                             topview.frame    = targetTopFrame;
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             UIView *movingView = [self.ibMainScrollView viewWithTag:regconizer.view.tag + kFakeUIElementBase];
+                             
+                             NSInteger tempTag  = topview.tag;
+                             topview.tag        = bottomView.tag;
+                             bottomView.tag     = tempTag;
+                             
+//                             movingView.tag     = bottomView.tag + kFakeUIElementBase;
+                             NSInteger newIndex = [self recordIndexAtLocationPoint:[regconizer locationInView:self.ibMainScrollView]];
+                             movingView.tag = kFakeUIElementBase + kUIElementBaseTag + newIndex;
+                             
+                             NSLog(@"Top : %zd bottom %zd move %zd", topview.tag, bottomView.tag, movingView.tag);
+                             _moving = NO;
+                         }];
     }
-    else if (fromIndex > toIndex){
-        
-    }
+    
 }
 
 #pragma mark - Long
@@ -366,6 +409,12 @@
         [textView resignFirstResponder];
     }
     
+    return YES;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
     return YES;
 }
 
